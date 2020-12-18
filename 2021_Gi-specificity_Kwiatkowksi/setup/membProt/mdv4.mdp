@@ -1,0 +1,44 @@
+; GENERAL
+;define              = -DPOSRES_BB
+integrator          = md                 ; MD integrator
+dt                  = 0.002              ; 2 fs timestep
+nsteps              = 250000000          ; Number of steps
+pbc                 = xyz                ; Periodic boundary conditions in xyz
+comm-mode           = linear             ; remove center of mass translation
+nstcomm             = 1                  ; frequency for center of mass motion removal
+; OUTPUT CONTROL OPTIONS
+nstxout             = 0            ; Do not want .trr-files
+nstvout             = 0            ; No velocities in output
+nstfout             = 0            ; No forces in output
+nstxtcout           = 10000        ; But do want .xtc-files
+nstlog              = 10000        ; Frequency to write energies to log file
+nstenergy           = 5000        ; Frequency to write energies to energy file .edr
+xtc-precision            = 1000
+simulation_part          = 1
+; NEIGHBORSEARCHING PARAMETERS
+nstlist             = 10            ; nblist update frequency
+ns_type             = grid          ; ns algorithm (simple or grid)
+; OPTIONS FOR ELECTROSTATICS AND VDW
+coulombtype         = pme            ; Particle mesh Ewald, do not change
+rcoulomb            = 1.0            ; distance for the Coulomb cut-off (Different from the Slipids paper, 
+                                     ; but since PME is used this will only speed things up)
+rlist               = 1.0            ; Short-range neighbor list
+;rlistlong           = 1.6            ; Long-range neighbor list (use along with rvdw=1.4 and remove for 
+                                     ; short rvdw values like rvdw=1.0)
+rvdw                = 1.0           ; Short value, used for compatibiliy with proteins and sugars.
+;rvdw                 = 1.4           ; Long value. Slightly different from the original Slipids papers, 
+                                     ; but used in their recent work, DOI: 10.1039/C3CP44472D.
+DispCorr            = EnerPres       ; Dispersion corrections to both the potential and pressure
+; OPTIONS FOR WEAK COUPLING ALGORITHMS
+tcoupl              = v-rescale          ; Thermostat
+tc-grps             = MEMBPROT Water_and_Ions       ; Couple lipids-protein (MEMBPROT) and solvent (SOL) seperatly
+tau-t               = 1.0 1.0            ; Time constant for temperature coupling
+ref-t               = 310 310            ; Desired temperature (K)
+Pcoupl              = parrinello-rahman  ; Barostat
+Pcoupltype          = semiisotropic      ; Pressure in xy and z couple separately
+ref-p               = 1.013 1.013        ; Desired pressure (bar)
+tau-p               = 10.0 10.0          ; Time constant for pressure coupling
+compressibility     = 4.5e-5 4.5e-5      ; Same as for water
+; CONSTRAINTS
+constraints          = all-bonds        ; Constrain all bonds
+constraint-algorithm = Lincs            ; With Lincs

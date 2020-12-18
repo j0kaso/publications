@@ -1,0 +1,53 @@
+;
+;	File 'topol.top' was generated
+;	By user: johanna (1000)
+;	On host: lenne
+;	At date: Mon Oct 17 17:13:07 2016
+;
+;	This is a standalone topology file
+;
+;	It was generated using program:
+;	pdb2gmx - VERSION 4.6.7
+;
+;	Command line was:
+;	pdb2gmx -f receptor_prepared-noWMs.pdb -o receptor_prepared.gro -p topol.top -i posres.itp -ff amber99sb-ildn -water spce -ignh 
+;
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "amber99sb-ildn.ff/forcefield.itp"
+#include "top/ions_nb_sigma_eps.itp"
+
+; Include chain topologies
+#include "topol_Protein_chain_A.itp"
+#include "topol_Protein_chain_B.itp"
+
+; Include water topology
+#include "top/spce.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "top/ions.itp"
+#include "top/POPC.itp"
+
+[ system ]
+; Name
+MetaII+Gt
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+Protein_chain_B     1
+POPC              178
+SOL                 2 ; Crystal
+SOL                19 ; Dowser 
+SOL             10354
+NA                 72
+CL                 75

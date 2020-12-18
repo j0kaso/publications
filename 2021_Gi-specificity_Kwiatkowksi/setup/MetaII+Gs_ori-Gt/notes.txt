@@ -1,0 +1,251 @@
+#########################
+# Meta2 Gs peptide in Gt orientation
+# source: Dennis (2016/10/13) + mutations # 
+#########################
+
+############################
+### Receptor preparation ###
+############################
+
+
+# * mutate back to native
+# * add protonation state: ASH 83, GLH 113, GLH 122, GLH 134
+# * check ligand
+# * add palmitoyl chain to C322, C323
+# * C-tail (327-348, UniProt entry P02699) not modeled (Kobilka-Lefkowitz-1987)
+# * change stabilizing mutants back: none
+# * add missing residues: I340, K341 by superposition with Gt
+# * add not resolved side chains of residues A: ; B: 
+
+#remove unneccesary stuff (1 x MES, 1 x SO4, 0 x TRE, 1 x BOG, 3 x NAG, 1 x BMA, 1 x MAN), keep HOH, RET, PLM
+cp Rhodopsin_Meta_II_Gt_Final.pdb clean.pdb
+
+
+#peptide from 3qpr (3PQR-Gt.pdb):
+cp clean.pdb receptor+peptide.pdb
+#visual inspection: energy minimization needed!
+#sequence: ***NLKDCGLF (343-350)
+#sequence: ILNNLKDCGLF (receptor+peptide.pdb)
+#sequence: WREEIKECGLF (wanted!!!)
+
+
+#add palmitoyl chain to C322 and reorder C323
+cp receptor+peptide.pdb receptor+peptide+YPL.pdb
+
+
+#add protonation states: ASH 83, GLH 113, GLH 122, GLH 134
+cp receptor+peptide+YPL.pdb receptor+peptide+YPL+protonation.pdb
+
+#LRD at right position
+cp receptor+peptide+YPL+protonation.pdb receptor+peptide+YPL+protonation+LRD.pdb
+
+
+mkdir Schro
+cp receptor+peptide+YPL+protonation+LRD.pdb Schro/receptor+peptide+YPL+protonation+LRD.pdb
+
+
+#################new#################
+#sequence: QRMHLRQYELL (wanted!!!)#
+#################new#################
+
+# * mutate: QRMHLRQYELL
+# * add not resolved side chains of residues A: 16, 17, 31, 108, 145, 147, 283, 311, 312; B: 340-343, 345-348, 350;
+# * not minimize (no clashes)
+# * alternative positions: A: 64, 161
+
+cp Schro/receptor+peptide+YPL+protonation+LRD-schro.pdb Schro/receptor_prepared.pdb
+# make order in pdb right, change HOH name, rename protonation states
+cp Schro/receptor_prepared.pdb receptor_prepared.pdb
+
+# * calculate internal WMs & add crystal WMs
+mkdir DOWSER
+cd DOWSER/
+dowser.py repeat ../Rhodopsin_Meta_II_Gt_Final.pdb -v -d --max_repeats 5
+cd ..
+editconf -f DOWSER/dowserwat.pdb -o dowserwat.gro
+# rename HOH to SOL and H1/2 to HW1/2
+# internal waters: Dowser 19, Crystal 2
+cp receptor_prepared.pdb receptor_prepared-onlyWMs.pdb
+cp receptor_prepared.pdb receptor_prepared-noWMs.pdb
+
+
+
+# * compare propka results
+mkdir propka
+cd propka
+propka31 ../receptor_prepared-noWMs.pdb
+cd ..
+# * protonation according to GROMACS
+
+
+# * Add forcefield parameters (see /home/johanna/projects/MDs/forcefield/notes-amber99sb-ildn.ff.txt)
+cp -r /home/johanna/projects/MDs/forcefield/residuetypes.dat /home/johanna/projects/MDs/forcefield/amber99sb-ildn.ff/ .
+cp -r /home/johanna/projects/MDs/forcefield/ions.mdp .
+
+pdb2gmx \
+	-f receptor_prepared-noWMs.pdb \
+	-o receptor_prepared.gro  \
+	-p topol.top \
+	-i posres.itp \
+	-ff amber99sb-ildn \
+	-water spce \
+	-ignh
+
+
+editconf -f receptor_prepared-onlyWMs.pdb -o receptor_prepared-onlyWMs.gro
+# * add WMs to gro and topol.top
+cp receptor_prepared.gro receptor_prepared+WMs.gro
+
+
+# * copy topologies
+cp -r /home/johanna/projects/MDs/membrane/POPC_Slipids/10A/prep/top .
+
+
+mkdir gmembed2
+cd gmembed2
+
+
+cp -r /home/johanna/projects/MDs/membrane/g_membed-simple.mdp g_membed.mdp
+# * ajust g_membed.mdp to R+P
+# copy from previous run (b2ar, jesper) membrane.gro
+
+cp ../receptor_prepared+WMs.gro receptor.gro
+
+editconf -f receptor.gro -o receptor_boxed.gro -box 7.63111 7.63111 10.00000
+editconf -f receptor_boxed.gro -o receptor_rotate.gro -rotate 0 90 0
+editconf -f receptor_rotate.gro -o receptor_centered.gro -center 3.815555 3.815555 5.0
+editconf -f receptor_centered.gro -o receptor-translate.gro -translate 0 0 -0.3
+
+cp receptor-translate.gro receptor+membrane.gro
+cp receptor-translate.gro internalWMs.gro
+# * merge POPC into receptor+membrane.gro, remove internal WMs, ajust numbers, make larger box
+
+cp ../topol.top topol-memb.top
+# * modify topol-memb.top (POPC: 188, SOL: 10405, NA: 76, CL: 76)
+# * change charge: system has non-zero total charge: 4.000002
+
+cp receptor+membrane.gro receptor+membrane+ions.gro
+#add membrane
+
+make_ndx -f receptor+membrane+ions.gro
+# * make group R+P: 1|13|14     name 28 R+P     q
+grompp -f g_membed.mdp -c receptor+membrane+ions.gro -p topol-memb.top -o membed.tpr -n index.ndx
+g_membed -f membed.tpr -p topol-memb.top -o membed.trr -c membedded.gro -n index.ndx -xyinit 0.1 -nxy 5000 -v
+#Will remove 0 Protein_chain_A molecules
+#Will remove 0 Protein_chain_B molecules
+#Will remove 10 POPC molecules
+#Will remove 52 SOL molecules
+#Will remove 1 NA molecules
+#Will remove 0 CL molecules
+
+
+cp topol-memb.top topol_sys.top
+cp membedded.gro sys.gro
+# *add internal WMs again *remove 1 CL
+cp sys.gro ../sys.gro
+cp topol_sys.top ../topol_sys.top
+cd ..
+
+###
+change topol_sys.top and check system
+
+g_stage.py minim --mdrun \
+    -s sys.gro \
+    -f topol_sys.top \
+    -id minim \
+    -o ../minim/
+
+
+g_stage.py equi \
+    -s ../minim/minim.gro \
+    --user becjotie \
+    --ref_t 310 \
+    --time 10 -jn eq_MetaII+Gs_ori-Gt \
+    --backend hlrn \
+    -ht 12 -nc 24 -nn 9 \
+    -f topol_sys.top \
+    -id equi \
+    -o ../eq/job/
+
+make_ndx -f sys.gro
+# * make group R+P: 17|19     name 24 Water_and_Ions
+# * make group R+P: 1|13     name 25 MEMBPROT
+
+cd ../eq/job/
+
+cp -r /media/johanna/internjo01/MDs/mdps/g4/membProt/ .
+# change eqv4.mdp Sol to Water_and_ions and about length...
+grompp -f membProt/eqv4.mdp  -c ../../minim/minim.gro -p ../../prep/topol_sys.top -po equi_out.mdp -o equi -n ../../prep/index.ndx
+#eq: DPOSRES
+
+
+mkdir ../eq/analysis
+g_energy -f ../eq/job/equi.part0001.edr -o ../eq/analysis/potential.xvg #13
+grace -nxy ../eq/analysis/potential.xvg -hdevice PNG -hardcopy -printfile ../eq/analysis/potential.png
+g_energy -f ../eq/job/equi.part0001.edr -o ../eq/analysis/energy.xvg #15
+grace -nxy ../eq/analysis/energy.xvg -hdevice PNG -hardcopy -printfile ../eq/analysis/energy.png
+g_energy -f ../eq/job/equi.part0001.edr -o ../eq/analysis/temperature.xvg #16
+grace -nxy ../eq/analysis/temperature.xvg -hdevice PNG -hardcopy -printfile ../eq/analysis/temperature.png
+g_energy -f ../eq/job/equi.part0001.edr -o ../eq/analysis/pressure.xvg #18
+grace -nxy ../eq/analysis/pressure.xvg -hdevice PNG -hardcopy -printfile ../eq/analysis/pressure.png
+
+
+
+
+g_stage.py genseed \
+    -ns 3 \
+    -s ../eq/job/equi.part0001.gro \
+    --user bec00085 \
+    --ref_t 310 \
+    --time 500 -jn gs_MetaII+Gs_ori-Gt\
+    --backend hlrn \
+    -ht 12 -nc 24 -nn 9 \
+    -f topol_sys.top \
+    -id gs \
+    -o ../gs/job/
+
+cd ../gs/job/
+cp -r /media/johanna/internjo01/MDs/mdps/g4/membProt/ .
+# change mdv4.mdp Sol to Water_and_ions and about length...
+grompp -f ../membProt/mdv4.mdp  -c ../../../eq/job/equi.part0001.gro -p ../../../prep/topol_sys.top -po gs_1_out.mdp -o gs_1 -n ../../../prep/index.ndx
+
+
+
+g_stage.py genseed \
+    -ns 2 \
+    -s ../eq/job/equi.part0001.gro \
+    --user bec00085 \
+    --ref_t 310 \
+    --time 500 -jn gs2_MetaII+Gs_ori-Gt\
+    --backend hlrn \
+    -ht 12 -nc 24 -nn 9 \
+    -f topol_sys.top \
+    -id gs2 \
+    -o ../gs2/job/
+
+cd ../gs2/job/
+cp -r /media/johanna/internjo01/MDs/mdps/g4/membProt/ .
+# change mdv4.mdp Sol to Water_and_ions and about length...
+grompp -f ../membProt/mdv4.mdp  -c ../../../eq/job/equi.part0001.gro -p ../../../prep/topol_sys.top -po gs2_2_out.mdp -o gs2_2 -n ../../../prep/index.ndx
+
+
+g_stage.py genseed \
+    -ns 5 \
+    -s ../eq/job/equi.part0001.gro \
+    --user bec00085 \
+    --ref_t 310 \
+    --time 500 -jn gs3_MetaII+Gs_ori-Gt\
+    --backend hlrn \
+    -ht 12 -nc 24 -nn 9 \
+    -f topol_sys.top \
+    -id gs3 \
+    -o ../gs3/job/
+
+cd ../gs3/job/
+cp -r /media/johanna/internjo01/MDs/mdps/g4/membProt/ .
+# change mdv4.mdp Sol to Water_and_ions and about length...
+grompp -f ../membProt/mdv4.mdp  -c ../../../eq/job/equi.part0001.gro -p ../../../prep/topol_sys.top -po gs3_5_out.mdp -o gs3_5 -n ../../../prep/index.ndx
+
+
+
+

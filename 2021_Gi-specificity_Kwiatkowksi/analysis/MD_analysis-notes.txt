@@ -1,0 +1,1228 @@
+#############################
+# analysis all: all  #
+#############################
+* gs  3*500 ns (310.0 K)
+
+
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_ndx.py create \
+        -s ../gs/job/"$r"/gs_"$r".tpr \
+        -o ../gs/analysis/"$r"/ \
+        -on ../gs/analysis/"$r"/index.ndx
+done
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_ndx.py create \
+        -s ../gs/job/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index.ndx \
+        -o ../gs/analysis/"$r"/ \
+        -on ../gs/analysis/"$r"/index2.ndx \
+        -g 'res' 'TMHs' '42-61,74-92,112-133,154-171,203-224,253-273,290-308' \
+        -g 'TMHsBackbone' '"TMHs" & "Backbone"' \
+        -g 'res' 'Receptor' '2-326' \
+        -g 'ReceptorLigand' '"Receptor"' \
+        -g 'res' 'Peptide' '340-350' \
+        -g 'ProteinPeptide' '"ReceptorLigand" | "Peptide"' \
+        -g 'ProteinPeptideBackbone' '"ProteinPeptide" & "Backbone"' \
+        -g 'ReceptorBackbone' '"Receptor" & "Backbone"' \
+        -g 'res' 'ProteinOnly' '2-326' \
+        -g 'res' 'ICL1' '61-75' \
+        -g 'ICL1Backbone' '"ICL1" & "Backbone"' \
+        -g 'res' 'ICL2' '134-156' \
+        -g 'ICL2Backbone' '"ICL2" & "Backbone"' \
+        -g 'res' 'H8' '311-322' \
+        -g 'H8Backbone' '"H8" & "Backbone"' \
+        -g 'res' 'I1Probe' '61-65' \
+        -g 'I1ProbeBackbone' '"I1Probe" & "Backbone"' \
+        -g 'res' 'I2Probe' '71-75' \
+        -g 'I2ProbeBackbone' '"I2Probe" & "Backbone"' \
+        -g 'res' 'I3Probe' '136-140' \
+        -g 'I3ProbeBackbone' '"I3Probe" & "Backbone"' \
+        -g 'res' 'I4Probe' '150-154' \
+        -g 'I4ProbeBackbone' '"I4Probe" & "Backbone"' \
+        -g 'res' 'I5Probe' '227-231' \
+        -g 'I5ProbeBackbone' '"I5Probe" & "Backbone"' \
+        -g 'res' 'I6Probe' '244-256' \
+        -g 'I6ProbeBackbone' '"I6Probe" & "Backbone"' \
+        -g 'res' 'I6Probe2' '244-248' \
+        -g 'I6Probe2Backbone' '"I6Probe2" & "Backbone"' \
+        -g 'res' 'I8Probe' '310-315' \
+        -g 'I8ProbeBackbone' '"I8Probe" & "Backbone"'
+done
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_ndx.py create \
+        -s ../gs/job/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index.ndx \
+        -o ../gs/analysis/"$r"/ \
+        -on ../gs/analysis/"$r"/index3.ndx \
+        -g 'res' 'TMHs' '42-61,74-92,112-133,154-171,203-224,253-273,290-308' \
+        -g 'TMHsBackbone' '"TMHs" & "Backbone"' \
+        -g 'res' 'Receptor' '2-326' \
+        -g 'ReceptorLigand' '"Receptor"' \
+        -g 'res' 'Peptide' '340-350' \
+        -g 'ProteinPeptide' '"ReceptorLigand" | "Peptide"' \
+        -g 'ProteinPeptideBackbone' '"ProteinPeptide" & "Backbone"' \
+        -g 'ReceptorBackbone' '"Receptor" & "Backbone"' \
+        -g 'res' 'ProteinOnly' '2-326' \
+        -g 'res' 'ICL1' '61-75' \
+        -g 'ICL1Backbone' '"ICL1" & "Backbone"' \
+        -g 'res' 'ICL2' '134-156' \
+        -g 'ICL2Backbone' '"ICL2" & "Backbone"' \
+        -g 'res' 'H8' '311-322' \
+        -g 'H8Backbone' '"H8" & "Backbone"' \
+        -g 'res' 'I1Probe' '61-65' \
+        -g 'I1ProbeBackbone' '"I1Probe" & "Backbone"' \
+        -g 'res' 'I2Probe' '71-75' \
+        -g 'I2ProbeBackbone' '"I2Probe" & "Backbone"' \
+        -g 'res' 'I3Probe' '136-140' \
+        -g 'I3ProbeBackbone' '"I3Probe" & "Backbone"' \
+        -g 'res' 'I4Probe' '150-154' \
+        -g 'I4ProbeBackbone' '"I4Probe" & "Backbone"' \
+        -g 'res' 'I5Probe' '227-231' \
+        -g 'I5ProbeBackbone' '"I5Probe" & "Backbone"' \
+        -g 'res' 'I6Probe' '244-256' \
+        -g 'I6ProbeBackbone' '"I6Probe" & "Backbone"' \
+        -g 'res' 'I6Probe2' '244-248' \
+        -g 'I6Probe2Backbone' '"I6Probe2" & "Backbone"' \
+        -g 'res' 'I8Probe' '310-315' \
+        -g 'I8ProbeBackbone' '"I8Probe" & "Backbone"' \
+        -g 'res' 'Peptide1-4' '340-342' \
+        -g 'Peptide1-4Backbone' '"Peptide1-4" & "Backbone"' \
+        -g 'res' 'Peptide5-7' '343-347' \
+        -g 'Peptide5-7Backbone' '"Peptide5-7" & "Backbone"' \
+        -g 'res' 'Peptide8-11' '348-350' \
+        -g 'Peptide8-11Backbone' '"Peptide8-11" & "Backbone"' \
+        -g 'res' 'Peptide1' '340' \
+        -g 'res' 'Peptide2' '341' \
+        -g 'res' 'Peptide3' '342' \
+        -g 'res' 'Peptide4' '343' \
+        -g 'res' 'Peptide5' '344' \
+        -g 'res' 'Peptide6' '345' \
+        -g 'res' 'Peptide7' '346' \
+        -g 'res' 'Peptide8' '347' \
+        -g 'res' 'Peptide9' '348' \
+        -g 'res' 'Peptide10' '349' \
+        -g 'res' 'Peptide11' '350' 
+done
+
+
+
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_process.py cat\
+        -pp gs_"$r" \
+        --continue_time \
+        -o ../gs/job/"$r"/ \
+        -on gs_"$r".xtc
+    g_process.py raw\
+        -s ../gs/job/"$r"/gs_"$r".tpr \
+	    -f ../gs/job/"$r"/gs_"$r".xtc \
+	    -n ../gs/analysis/"$r"/index2.ndx \
+        -ne ProteinPeptide \
+        -nl 15 \
+        -pbc mol \
+        -nc ProteinPeptide \
+        -nf ReceptorBackbone \
+        -o ../gs/analysis/"$r"/
+done
+
+
+# concatenate #
+
+mkdir ../all
+echo -e "c\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\n" | trjcat -f \
+    ../gs/analysis/1/gs_1_mc_fit_protein.xtc \
+    ../gs/analysis/2/gs_2_mc_fit_protein.xtc \
+    ../gs/analysis/3/gs_3_mc_fit_protein.xtc \
+    ../gs2/analysis/1/gs2_1_mc_fit_protein.xtc \
+    ../gs2/analysis/2/gs2_2_mc_fit_protein.xtc \
+    ../gs3/analysis/1/gs3_1_mc_fit_protein.xtc \
+    ../gs3/analysis/2/gs3_2_mc_fit_protein.xtc \
+    ../gs3/analysis/3/gs3_3_mc_fit_protein.xtc \
+    ../gs3/analysis/4/gs3_4_mc_fit_protein.xtc \
+    ../gs3/analysis/5/gs3_5_mc_fit_protein.xtc \
+    -o ../all/md_all_protein.xtc -settime
+
+mkdir ../all-gs-gs2
+echo -e "c\nc\nc\nc\nc\nc\nc\nc\n" | trjcat -f \
+    ../gs/analysis/1/gs_1_mc_fit_protein.xtc \
+    ../gs/analysis/2/gs_2_mc_fit_protein.xtc \
+    ../gs/analysis/3/gs_3_mc_fit_protein.xtc \
+    ../gs2/analysis/1/gs2_1_mc_fit_protein.xtc \
+    ../gs2/analysis/2/gs2_2_mc_fit_protein.xtc \
+    -o ../all-gs-gs2/md_all_protein.xtc -settime
+mkdir ../gs/all
+echo -e "c\nc\nc\nc\nc\nc\n" | trjcat -f \
+    ../gs/analysis/1/gs_1_mc_fit_protein.xtc \
+    ../gs/analysis/2/gs_2_mc_fit_protein.xtc \
+    ../gs/analysis/3/gs_3_mc_fit_protein.xtc \
+    -o ../gs/all/md_all_protein.xtc -settime
+
+
+
+###            500 500 500 500 500
+
+
+#####################################################
+# hydrophobic #
+#####################################################
+arr=( "1" "2" "3" "4" "5" )
+for r in "${arr[@]}"; do
+    hydrophobic.py \
+        -f ../gs3/analysis/"$r"/gs3_"$r"_mc_fit_protein.xtc \
+        -n ../gs3/analysis/"$r"/index2.ndx \
+        -s ../gs3/analysis/"$r"/gs3_"$r".tpr \
+        -o ../gs3/analysis/"$r"/hydrophobic/receptorpeptide/ \
+        -ng ProteinPeptide \
+        -pepch B \
+        -recch A \
+        -vls 500 \
+        -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0 -fc 0.2
+done
+
+arr=( "1" "2" )
+for r in "${arr[@]}"; do
+    hydrophobic.py \
+        -f ../gs2/analysis/"$r"/gs2_"$r"_mc_fit_protein.xtc \
+        -n ../gs2/analysis/"$r"/index2.ndx \
+        -s ../gs2/analysis/"$r"/gs2_"$r".tpr \
+        -o ../gs2/analysis/"$r"/hydrophobic/receptorpeptide/ \
+        -ng ProteinPeptide \
+        -pepch B \
+        -recch A \
+        -vls 500 \
+        -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0 -fc 0.2
+done
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    hydrophobic.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -o ../gs/analysis/"$r"/hydrophobic/receptorpeptide/ \
+        -ng ProteinPeptide \
+        -pepch B \
+        -recch A \
+        -vls 500 \
+        -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0 -fc 0.2
+done
+
+
+
+hydrophobic.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -n ../gs/analysis/1/index2.ndx \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -o ../gs/all/hydrophobic/receptorpeptide/ \
+    -ng ProteinPeptide \
+    -pepch B \
+    -recch A \
+    -vls 250 250 250 \
+    -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0 -fc 0.2
+
+
+python /media/johanna/internjo01/scripts/hydrophobic2.py percentages-gs_1.txt,percentages-gs_2.txt,percentages-gs_3.txt,percentages-gs2_1.txt,percentages-gs2_2.txt
+
+#####################################################
+# dist #
+#####################################################
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_dist.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/dist/I6Probes/ \
+        -di I2ProbeBackbone I6ProbeBackbone \
+        -di I3ProbeBackbone I6ProbeBackbone \
+        -di I4ProbeBackbone I6ProbeBackbone \
+        -vls 250  \
+        -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0
+done
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_dist.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/dist/I6Probes2/ \
+        -di I2ProbeBackbone I6Probe2Backbone \
+        -di I3ProbeBackbone I6Probe2Backbone \
+        -di I4ProbeBackbone I6Probe2Backbone \
+        -vls 500  \
+        -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0
+done
+
+
+
+g_dist.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/dist/I6Probes/ \
+    -di I2ProbeBackbone I6ProbeBackbone \
+    -di I3ProbeBackbone I6ProbeBackbone \
+    -di I4ProbeBackbone I6ProbeBackbone \
+    -vls 250 250 250 \
+    -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0
+
+g_dist.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/dist/I6Probes2/ \
+    -di I2ProbeBackbone I6Probe2Backbone \
+    -di I3ProbeBackbone I6Probe2Backbone \
+    -di I4ProbeBackbone I6Probe2Backbone \
+    -vls 250 250 250 \
+    -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0
+
+
+
+
+
+
+#####################################################
+# dssp #
+#####################################################
+
+g_dssp.py \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/dssp/peptide/ \
+    -ts 32 \
+    -ng Peptide \
+    -pynl 5 -dpi 300 -pfs 8 4 -pts 0.6 -pynl 4 \
+    -vls 250 250 250 \
+    -ao 0
+
+g_dssp.py \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -f ../all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../all/dssp/peptide/ \
+    -ts 32 \
+    -ng Peptide \
+    -pynl 5 -dpi 300 -pfs 8 4 -pts 0.6 -pynl 4 \
+    -vls 500 500 500 500 500 500 500 500 500 500 \
+    -ao 0
+
+
+g_dssp.py \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -f ../all-gs-gs2/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../all-gs-gs2/dssp/peptide/ \
+    -ts 32 \
+    -ng Peptide \
+    -pynl 5 -dpi 300 -pfs 8 4 -pts 0.6 -pynl 4 \
+    -vls 500 500 500 500 500 \
+    -ao 0
+
+
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_dssp.py \
+        -gro ../gs/analysis/"$r"/gs_"$r"_protein.gro \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/dssp/peptide/ \
+        -ts 32 \
+        -ng Peptide \
+        -pynl 5 -dpi 300 -pfs 8 4 -pts 0.6 -pynl 4 \
+        -vls 500 \
+        -ao 0
+done
+
+#####################################################
+# rmsd #
+#####################################################
+
+g_rmsd.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/rmsd/receptor-bb/ \
+    -ao 0 \
+    -vls 250 250 250 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -g 'receptor' 'TMHsBackbone' 'ReceptorBackbone' \
+    -g 'tmh' 'TMHsBackbone' 'TMHsBackbone' \
+    -g 'ICL1' 'TMHsBackbone' 'ICL1Backbone' \
+    -g 'ICL2' 'TMHsBackbone' 'ICL2Backbone' \
+    -g 'H8' 'TMHsBackbone' 'H8Backbone' 
+
+g_rmsd.py \
+    -f ../all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../all/rmsd/peptide/ \
+    -ao 0 \
+    -vls 500 500 500 500 500 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -g '32' '32' '32' 
+
+g_rmsd.py \
+    -f ../all/peptide.xtc \
+    -s ../all/peptide.gro \
+    -n ../all/peptide.ndx \
+    -o ../all/rmsd/peptide/ \
+    -ao 0 \
+    -vls 500 500 500 500 500 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -g '0' '0' '0' 
+
+
+g_rmsd.py \
+    -f ../all-gs-gs2/peptide.xtc \
+    -s ../all-gs-gs2/peptide.gro \
+    -n ../all-gs-gs2/peptide.ndx \
+    -o ../all-gs-gs2/rmsd/peptide/ \
+    -ao 0 \
+    -vls 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -g '0' '0' '0' 
+
+g_rmsd.py \
+    -f ../all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../all/rmsd/peptide_fit-receptor/ \
+    -ao 0 \
+    -vls 500 500 500 500 500 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -g '31' '31' '32' 
+
+g_rmsd.py \
+    -f ../all-gs-gs2/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../all-gs-gs2/rmsd/peptide_fit-receptor/ \
+    -ao 0 \
+    -vls 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -g '31' '31' '32' 
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_rmsd.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/rmsd/peptide/ \
+        -ao 0 \
+        -vls 500 \
+        -g '32' '32' '32' \
+        -plo -pfs 8 4 -pts 0.6 -dpi 300
+done
+
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_rmsd.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/rmsd/peptide_fit-receptor/ \
+        -ao 0 \
+        -vls 500 \
+        -g '31' '31' '32' \
+        -plo -pfs 8 4 -pts 0.6 -dpi 300
+done
+
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_rmsd.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index3.ndx \
+        -o ../gs/analysis/"$r"/rmsd/Peptide8Backbone-11_fit-receptor/ \
+        -ao 0 \
+        -vls 500 \
+        -g '31' '31' '64' \
+        -plo -pfs 8 4 -pts 0.6 -dpi 300
+done
+
+g_rmsd.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index3.ndx \
+    -o ../gs/all/rmsd/Peptide8-11Backbone_fit-receptor/ \
+    -ao 0 \
+    -vls 250 250 250 \
+    -g '31' '31' '64' \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300
+
+'Peptide1-4'59
+'Peptide1-4Backbone'60
+'Peptide5-7'61
+'Peptide5-7Backbone'62
+'Peptide8-11'63
+'Peptide8-11Backbone'64
+
+#####################################################
+# rmsf #
+#####################################################
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_rmsf.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index3.ndx \
+        -o ../gs/analysis/"$r"/rmsf/helices/ \
+        -ng ReceptorBackbone \
+        -gro ../gs/analysis/"$r"/gs_"$r"_protein.gro \
+        -rr 42 61 \
+        -rr 74 92 \
+        -rr 112 133 \
+        -rr 154 171 \
+        -rr 203 224 \
+        -rr 253 273 \
+        -rr 290 308 \
+        -ao 0 \
+        -vls 500 \
+        -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+        -nthl 5
+done
+
+g_rmsf.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index3.ndx \
+    -o ../gs/all/rmsf/helices/ \
+    -ng ReceptorBackbone \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -rr 42 61 \
+    -rr 74 92 \
+    -rr 112 133 \
+    -rr 154 171 \
+    -rr 203 224 \
+    -rr 253 273 \
+    -rr 290 308 \
+    -ao 0 \
+    -vls 250 250 250 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -nthl 5
+
+g_rmsf.py \
+    -f ../all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index3.ndx \
+    -o ../all/rmsf/helices/ \
+    -ng ReceptorBackbone \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -rr 42 61 \
+    -rr 74 92 \
+    -rr 112 133 \
+    -rr 154 171 \
+    -rr 203 224 \
+    -rr 253 273 \
+    -rr 290 308 \
+    -rr 340 350 \
+    -ao 0 \
+    -vls 500 500 500 500 500 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -nthl 5
+
+g_rmsf.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/rmsf/peptide/ \
+    -ng ProteinPeptideBackbone \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -rr 340 350 \
+    -rr 340 342 \
+    -rr 343 347 \
+    -rr 348 350 \
+    -ao 0 \
+    -vls 250 250 250 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -nthl 5
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_rmsf.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index3.ndx \
+        -o ../gs/analysis/"$r"/rmsf/peptide/ \
+        -ng ProteinPeptideBackbone \
+        -gro ../gs/analysis/"$r"/gs_"$r"_protein.gro \
+        -rr 340 350 \
+        -rr 340 342 \
+        -rr 343 347 \
+        -rr 348 350 \
+        -ao 0 \
+        -vls 500 \
+        -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+        -nthl 5
+done
+
+g_rmsf.py \
+    -f ../all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../all/rmsf/peptide-nk/ \
+    -ng ProteinPeptideBackbone \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -rr 42 61 \
+    -rr 74 92 \
+    -rr 112 133 \
+    -rr 154 171 \
+    -rr 203 224 \
+    -rr 253 273 \
+    -rr 290 308 \
+    -ao 0 \
+    -vls 500 500 500 500 500 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -nthl 5
+
+g_rmsf.py \
+    -f ../all-gs-gs2/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../all-gs-gs2/rmsf/peptide/ \
+    -ng ProteinPeptideBackbone \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -rr 340 350 \
+    -rr 340 342 \
+    -rr 343 347 \
+    -rr 348 350 \
+    -ao 0 \
+    -vls 500 500 500 500 500 \
+    -plo -pfs 8 4 -pts 0.6 -dpi 300 \
+    -nthl 5
+
+#####################################################
+# g_traj #
+#####################################################
+arr=( "I6ProbeBackbone" "E6ProbeBackbone" "I6Probe2Backbone" )
+for r in "${arr[@]}"; do
+    g_traj.py \
+        -f ../all/md_all_protein.xtc \
+        -s ../gs/analysis/1/gs_1.tpr \
+        -n ../gs/analysis/1/index2.ndx \
+        -o ../all/traj/"$r"/ \
+        -ng "$r" \
+        -xyzm 0 0 0 \
+        -res 1 -pfs 8 4 -plo -pts 0.6 -dpi 300 \
+        -vls 500 500 500 500 500 \
+        -ao 0
+done
+#####################################################
+# hbond #
+#####################################################
+
+
+g_hbond.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/hbond/peptide_peptide/ \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -g1 32 \
+    -g2 32 \
+    -vls 250 250 250 \
+    -fc 0.2 -pfs 8 4 -ao 0
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_hbond.py \
+        -gro ../gs/analysis/"$r"/gs_"$r".gro \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/hbond/peptide_peptide/ \
+        -g1 32 \
+        -g2 32 \
+        -vls 500 \
+        -fc 0.2 -pfs 8 4 -ao 0
+done
+
+
+g_hbond.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/hbond/receptor_peptide/ \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -g1 31 \
+    -g2 32 \
+    -vls 250 250 250 \
+    -fc 0.2 -pfs 8 4 -ao 0
+
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_hbond.py \
+        -gro ../gs/analysis/"$r"/gs_"$r"_protein.gro \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/hbond/receptor_peptide/ \
+        -g1 31 \
+        -g2 32 \
+        -vls 500 \
+        -fc 0.2 -pfs 8 4 -ao 0
+done
+
+g_hbond.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index2.ndx \
+    -o ../gs/all/hbond/receptor_peptide_contact/ \
+    -gro ../gs/analysis/1/gs_1_protein.gro \
+    -g1 31 \
+    -g2 32 \
+    -co \
+    -vls 500 500 500 \
+    -fc 0.2 -pfs 8 4 -ao 0
+
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_hbond.py \
+        -gro ../gs/analysis/"$r"/gs_"$r"_protein.gro \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -o ../gs/analysis/"$r"/hbond/receptor_peptide_contact/ \
+        -g1 31 \
+        -g2 32 \
+        -co \
+        -vls 500 \
+        -fc 0.2 -pfs 8 4 -ao 0
+done
+mkdir ../gs/all/hbond-contacts
+mkdir ../gs/all/hbonds
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    cp ../gs/analysis/"$r"/hbond/receptor_peptide/hbond.txt ../gs/all/hbonds/hbond-gs"$r".txt
+done
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    cp ../gs/analysis/"$r"/hbond/receptor_peptide_contact/hbond.txt ../gs/all/hbond-contacts/hbond-gs"$r".txt
+done
+
+cd ../gs/all/hbond-contacts
+python /media/johanna/internjo01/scripts/sortcontacts.py hbond-gs1.txt,hbond-gs2.txt,hbond-gs3.txt
+cd ../hbonds
+python /media/johanna/internjo01/scripts/sortcontacts.py hbond-gs1.txt,hbond-gs2.txt,hbond-gs3.txt
+cd ../../../prep
+
+
+
+#####################################################
+# capture #
+#####################################################
+g_capture.py \
+    -f ../gs/all/md_all_protein.xtc \
+    -s ../gs/analysis/1/gs_1.tpr \
+    -n ../gs/analysis/1/index3.ndx \
+    -o ../gs/all/capture/receptorpeptide/ \
+    -ng ProteinPeptide \
+    -vls 250 250 250 \
+    -tres 20 \
+    -skip 20 \
+    -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0
+#always ajust script
+python /media/johanna/internjo01/scripts/cation-pi-script.py ../gs/all/capture/receptorpeptide/data/
+arr=( "1" "2" "3" )
+for r in "${arr[@]}"; do
+    g_capture.py \
+        -f ../gs/analysis/"$r"/gs_"$r"_mc_fit_protein.xtc \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -s ../gs/analysis/"$r"/gs_"$r".tpr \
+        -o ../gs/analysis/"$r"/capture/receptorpeptide/ \
+        -ng ProteinPeptide \
+        -vls 250 \
+        -tres 20 \
+        -skip 20 \
+        -pfs 8 4 -plo -pts 0.6 -dpi 300 -ao 0
+done
+arr=( "1" )
+for r in "${arr[@]}"; do
+    python /media/johanna/internjo01/scripts/cation-pi-script.py ../gs/analysis/"$r"/capture/receptorpeptide/data/ ;
+done
+
+
+python /media/johanna/internjo01/scripts/cation-pi-script.py ../all/capture/receptorpeptide/data/
+
+
+
+#########
+###atm###
+#########
+
+
+python /media/johanna/internjo01/scripts/change-frames.py ../all/capture/receptorpeptide/data/ ../all/capture/receptorpeptide/data2
+
+
+
+
+
+#####################################################
+#cluster
+#####################################################
+
+
+trjconv -f ../all/md_all_protein.xtc -s ../gs/analysis/1/gs_1_protein.gro -dump 0 -o ../all/peptide.gro -n ../gs/analysis/1/index2.ndx
+trjconv -f ../all/md_all_protein.xtc -s ../gs/analysis/1/gs_1_protein.gro -o ../all/peptide.xtc -n ../gs/analysis/1/index2.ndx
+trjconv -f ../all/peptide.xtc -s ../all/peptide.gro -dump 0 -o ../all/peptide.gro
+make_ndx -f ../all/peptide.gro -o ../all/peptide.ndx
+
+
+
+trjconv -f ../all-gs-gs2/md_all_protein.xtc -s ../gs/analysis/1/gs_1_protein.gro -dump 0 -o ../all-gs-gs2/peptide.gro -n ../gs/analysis/1/index2.ndx
+trjconv -f ../all-gs-gs2/md_all_protein.xtc -s ../gs/analysis/1/gs_1_protein.gro -o ../all-gs-gs2/peptide.xtc -n ../gs/analysis/1/index2.ndx
+trjconv -f ../all-gs-gs2/peptide.xtc -s ../all-gs-gs2/peptide.gro -dump 0 -o ../all-gs-gs2/peptide.gro
+make_ndx -f ../all-gs-gs2/peptide.gro -o ../all-gs-gs2/peptide.ndx
+
+
+
+
+arr=( "0.1" "0.11" "0.12" "0.13" "0.14" "0.15" )
+for r in "${arr[@]}"; do
+    g_cluster.py \
+        -o ../gs/all/cluster/peptide-out"$r"/ \
+        -cs len \
+        -cm gromos \
+        -csd DESC \
+        -f ../gs/all/peptide.xtc \
+        -s ../gs/all/peptide.gro \
+        -ctn 10 \
+        -n ../gs/all/peptide.ndx \
+        -ng Protein \
+        -og Protein \
+        -fg Protein \
+        -co "$r" \
+        -skip 20 \
+        -vls 250 250 250 \
+        -pts 0.6 -pfs 8 4 -dpi 300 -ao 0
+done
+
+
+
+
+trjconv -f ../gs/analysis/1/gs_1_mc_fit_protein.xtc -s ../gs/analysis/1/gs_1_protein.gro -dump 0 -o ../gs/analysis/1/gs_1_peptide.gro -n ../gs/analysis/1/index2.ndx
+trjconv -f ../gs/analysis/1/gs_1_mc_fit_protein.xtc -s ../gs/analysis/1/gs_1_protein.gro -o ../gs/analysis/1/gs_1_peptide.xtc -n ../gs/analysis/1/index2.ndx
+trjconv -f ../gs/analysis/1/gs_1_peptide.xtc -s ../gs/analysis/1/gs_1_peptide.gro -dump 0 -o ../gs/analysis/1/gs_1_peptide.gro
+make_ndx -f ../gs/analysis/1/gs_1_peptide.gro -o ../gs/analysis/1/gs_1_peptide.ndx
+arr=( "0.1" "0.11" "0.12" "0.13" "0.14" "0.15" )
+for r in "${arr[@]}"; do
+    g_cluster.py \
+        -o ../gs/analysis/1/cluster/peptide-out"$r"/ \
+        -cs len \
+        -cm gromos \
+        -csd DESC \
+        -f ../gs/analysis/1/gs_1_peptide.xtc \
+        -s ../gs/analysis/1/gs_1_peptide.gro \
+        -ctn 10 \
+        -n ../gs/analysis/1/gs_1_peptide.ndx \
+        -ng Protein \
+        -og Protein \
+        -fg Protein \
+        -co "$r" \
+        -skip 20 \
+        -vls 500 \
+        -pts 0.6 -pfs 8 4 -dpi 300 -ao 0
+done
+
+
+
+
+#####################################################
+#saltbr - not working - use vmd timeline
+#####################################################
+
+
+mkdir ../gs/analysis/1/saltbr
+cd ../gs/analysis/1/saltbr
+mkdir ../gs/analysis/2/saltbr
+cd ../gs/analysis/2/saltbr
+mkdir ../gs/analysis/3/saltbr
+cd ../gs/analysis/3/saltbr
+
+mkdir ../all/saltbr
+cd ../all/saltbr
+cp ../../gs/analysis/1/saltbr/vmd-all-gs_1.txt vmd-all-gs_1.txt
+cp ../../gs/analysis/2/saltbr/vmd-all-gs_2.txt vmd-all-gs_2.txt
+cp ../../gs/analysis/3/saltbr/vmd-all-gs_3.txt vmd-all-gs_3.txt
+
+mkdir ../gs2/analysis/1/saltbr
+cd ../gs2/analysis/1/saltbr
+mkdir ../gs2/analysis/2/saltbr
+cd ../gs2/analysis/2/saltbr
+
+
+cp ../../gs2/analysis/1/saltbr/vmd-all-gs2_1.txt vmd-all-gs2_1.txt
+cp ../../gs2/analysis/2/saltbr/vmd-all-gs2_2.txt vmd-all-gs2_2.txt
+python /media/johanna/internjo01/scripts/saltbr.py vmd-all-gs_1.txt,vmd-all-gs_2.txt,vmd-all-gs_3.txt,vmd-all-gs2_1.txt,vmd-all-gs2_2.txt
+
+
+mkdir ../gs3/analysis/1/saltbr
+cd ../gs3/analysis/1/saltbr
+mkdir ../gs3/analysis/2/saltbr
+cd ../gs3/analysis/2/saltbr
+mkdir ../gs3/analysis/3/saltbr
+cd ../gs3/analysis/3/saltbr
+mkdir ../gs3/analysis/4/saltbr
+cd ../gs3/analysis/4/saltbr
+mkdir ../gs3/analysis/5/saltbr
+cd ../gs3/analysis/5/saltbr
+
+
+mkdir ../gs3/analysis/1/hbond
+cd ../gs3/analysis/1/hbond
+mkdir ../gs3/analysis/2/hbond
+cd ../gs3/analysis/2/hbond
+mkdir ../gs3/analysis/3/hbond
+cd ../gs3/analysis/3/hbond
+mkdir ../gs3/analysis/4/hbond
+cd ../gs3/analysis/4/hbond
+mkdir ../gs3/analysis/5/hbond
+cd ../gs3/analysis/5/hbond
+
+
+mkdir ../gs2/analysis/1/saltbr
+mkdir ../gs2/analysis/1/hbond
+cd ../gs2/analysis/1/saltbr
+cd ../hbond
+mkdir ../gs2/analysis/2/saltbr
+mkdir ../gs2/analysis/2/hbond
+cd ../gs2/analysis/2/saltbr
+cd ../hbond
+
+
+mkdir ../gs/analysis/1/saltbr
+mkdir ../gs/analysis/1/hbond
+cd ../gs/analysis/1/saltbr
+cd ../hbond
+mkdir ../gs/analysis/2/saltbr
+mkdir ../gs/analysis/2/hbond
+cd ../gs/analysis/2/saltbr
+cd ../hbond
+mkdir ../gs/analysis/3/saltbr
+mkdir ../gs/analysis/3/hbond
+cd ../gs/analysis/3/saltbr
+cd ../hbond
+mkdir ../gs3/analysis/4/saltbr
+mkdir ../gs3/analysis/4/hbond
+cd ../gs3/analysis/4/saltbr
+cd ../hbond
+mkdir ../gs3/analysis/5/saltbr
+mkdir ../gs3/analysis/5/hbond
+cd ../gs3/analysis/5/saltbr
+cd ../hbond
+
+
+mkdir ../gs2/analysis/1/hbond
+cd ../gs2/analysis/1/hbond
+vmd
+mkdir ../gs2/analysis/2/hbond
+cd ../gs2/analysis/2/hbond
+
+
+vmd hbond analysis
+protein and not resid 2381 to 2394
+resid 2381 to 2394
+3.5 30
+hbonds-3.5-30.dat
+hbonds-details-3.5-30.dat
+hbonds-3.5-30-respair.dat
+hbonds-details-3.5-30-respair.dat
+hbonds-3.5-30-unique.dat
+hbonds-details-3.5-30-unique.dat
+
+
+
+python /media/johanna/internjo01/scripts/hbonds-vmd.py hbonds-details-30-respair-gs_1.dat,hbonds-details-30-respair-gs_2.dat,hbonds-details-30-respair-gs2_1.dat,hbonds-details-30-respair-gs2_2.dat 
+
+mkdir ../gs/analysis/1/hbond
+cd ../gs/analysis/1/hbond
+vmd
+mkdir ../gs/analysis/2/hbond
+cd ../gs/analysis/2/hbond
+vmd
+mkdir ../gs/analysis/3/hbond
+cd ../gs/analysis/3/hbond
+vmd
+
+vmd hbond analysis
+protein and not resid 340 to 350
+resid 340 to 350
+3.5 30
+hbonds-3.5-30.dat
+hbonds-details-3.5-30.dat
+hbonds-3.5-30-respair.dat
+hbonds-details-3.5-30-respair.dat
+hbonds-3.5-30-unique.dat
+hbonds-details-3.5-30-unique.dat
+
+cp ../../gs2/analysis/1/hbond/hbonds-details-3.5-30-respair.dat hbonds-details-3.5-30-respair-gs2_1.dat
+
+
+python /media/johanna/internjo01/scripts/hbonds-vmd.py hbonds-details-3.5-30-respair-gs_1.dat,hbonds-details-3.5-30-respair-gs_2.dat,hbonds-details-3.5-30-respair-gs_3.dat,hbonds-details-3.5-30-respair-gs2_1.dat,hbonds-details-3.5-30-respair-gs2_2.dat 
+
+
+
+
+##### energies
+
+
+
+arr=( "1" "2" )
+for r in "${arr[@]}"; do
+    g_ndx.py create \
+        -s ../gs/job/"$r"/gs_"$r".tpr \
+        -o ../gs/analysis/"$r"/ \
+        -on ../gs/analysis/"$r"/index.ndx
+done
+
+arr=( "1" "2" )
+for r in "${arr[@]}"; do
+    g_ndx.py create \
+        -s ../gs/job/"$r"/gs_"$r".tpr \
+        -n ../gs/analysis/"$r"/index.ndx \
+        -o ../gs/analysis/"$r"/ \
+        -on ../gs/analysis/"$r"/index2.ndx \
+        -g 'Peptide' '"Protein"' \
+        -g 'Rest' '"SOL" | "Ion"' \
+        -g 'PeptideBackbone' '"Peptide" & "Backbone"'
+done
+
+arr=( "1" "2" )
+for r in "${arr[@]}"; do
+    g_process.py cat\
+        -pp gs_"$r" \
+        --continue_time \
+        -o ../gs/job/"$r"/ \
+        -on gs_"$r".xtc
+done
+arr=( "1" "2" )
+for r in "${arr[@]}"; do
+    g_process.py raw\
+        -s ../gs/job/"$r"/gs_"$r".tpr \
+        -f ../gs/job/"$r"/gs_"$r".xtc \
+        -n ../gs/analysis/"$r"/index2.ndx \
+        -ne Peptide \
+        -nl 15 \
+        -pbc mol \
+        -nc Peptide \
+        -nf PeptideBackbone \
+        -o ../gs/analysis/"$r"/
+done
+
+
+gmx_mpi make_ndx -f ../../../eq/job/equi.part0001.gro -n ../../analysis/1/index2.ndx
+ReceptorLigand
+Peptide
+Rest
+gmx_mpi grompp -f ../1/gs_1-new.mdp -c ../../../eq/job/equi.part0001.gro -p ../../../prep/topol_sys.top -po gs_1_out.mdp -o ie -n ../../analysis/1/index2.ndx 
+gmx_mpi mdrun -deffnm ie -rerun gs_2.xtc -nb cpu
+
+gmx energy -f ie.edr -o fe.xvg -fee > fe.sum
+52 53 64 65
+gmx energy -f ie.edr -o fe-totalE.xvg -fee > fe-totalE.sum
+54 55 66 67
+
+
+
+gmx energy -f ie.edr -o fe.xvg -fee > fe.sum
+47 48
+gmx energy -f ie.edr -o fe-totalE.xvg -fee > fe-totalE.sum
+49 50
+
+
+
+arr=( "gs" "gs2" "gs3" )
+arb=( "1" "2" "3" "4" "5" )
+for r in "${arr[@]}"; do
+    for j in "${arb[@]}"; do
+        cd "$r"/job/"$j"
+        cp /mnt/internJT03/Rho/Dennis/MetaII+Gt/gs/all/job/membProt/mdv4-new.mdp .
+        cp /mnt/internJT03/Rho/Dennis/MetaII+Gt/gs/all/job/index.ndx .
+        gmx_mpi grompp -f mdv4-new.mdp -c ../../../eq/job/equi.part0001.gro -p ../../../prep/topol_sys.top -po "$r"_"$j"_out.mdp -o ie -n index.ndx 
+        gmx_mpi mdrun -deffnm ie -rerun "$r"_"$j".xtc -nb cpu
+        echo "52\n53\n64\n65\n\n" | gmx energy -f ie.edr -o fe.xvg -fee > fe.sum
+        cd /mnt/internJT03/Rho/Dennis/MetaII+Gt/
+    done
+done
+
+
+
+
+
+arr=( "gs" "gs2" "gs3" )
+arb=( "1" "2" "3" "4" "5" )
+for r in "${arr[@]}"; do
+    for j in "${arb[@]}"; do
+        cd "$r"/job/"$j"
+        gmx energy -f ie.edr -o fe.xvg -fee > fe.sum
+        cd /mnt/internJT03/Rho/Dennis/MetaII+Gt/
+    done
+done
+
+
+gmx_mpi make_ndx -f ../../../eq/job/equi.part0001.gro -n ../../analysis/1/index2.ndx
+ReceptorLigand
+MEMBPROT
+Peptide
+Rest
+
+
+arr=( "gs" "gs2" "gs3" )
+arb=( "1" "2" "3" "4" "5" )
+for r in "${arr[@]}"; do
+    for j in "${arb[@]}"; do
+        cd "$r"/job/"$j"
+        cp /mnt/internJT03/Rho/Dennis/MetaII+Gt/gs/all/job/membProt/mdv4-new.mdp .
+        cp /mnt/internJT03/Rho/Dennis/MetaII+Gi/gs/job/1/index.ndx .
+        gmx_mpi grompp -f mdv4-new.mdp -c ../../../eq/job/equi.part0001.gro -p ../../../prep/topol_sys.top -po "$r"_"$j"_out.mdp -o ie -n index.ndx 
+        gmx_mpi mdrun -deffnm ie -rerun "$r"_"$j".xtc -nb cpu
+        echo "52\n53\n64\n65\n\n" | gmx energy -f ie.edr -o fe.xvg -fee > fe.sum
+        cd /mnt/internJT03/Rho/Dennis/MetaII+Gi/
+    done
+done
+
+#####RMSD
+
+
+
+gmx=gmx_mpi
+
+mkdir all2
+echo -e "c\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\n" | "$gmx" trjcat -f \
+    gs/analysis/1/gs_1_mc_fit_protein.xtc \
+    gs/analysis/2/gs_2_mc_fit_protein.xtc \
+    gs/analysis/3/gs_3_mc_fit_protein.xtc \
+    gs2/analysis/1/gs2_1_mc_fit_protein.xtc \
+    gs2/analysis/2/gs2_2_mc_fit_protein.xtc \
+    gs3/analysis/1/gs3_1_mc_fit_protein.xtc \
+    gs3/analysis/2/gs3_2_mc_fit_protein.xtc \
+    gs3/analysis/3/gs3_3_mc_fit_protein.xtc \
+    gs3/analysis/4/gs3_4_mc_fit_protein.xtc \
+    gs3/analysis/5/gs3_5_mc_fit_protein.xtc \
+    -o all2/md_all_protein_gs-gs2-gs3.xtc -settime
+echo -e "c\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\nc\n" | "$gmx" trjcat -f \
+    gs/analysis/1/gs_1_mc_fit_protein.xtc \
+    gs/analysis/2/gs_2_mc_fit_protein.xtc \
+    gs/analysis/3/gs_3_mc_fit_protein.xtc \
+    gs2/analysis/1/gs2_1_mc_fit_protein.xtc \
+    gs2/analysis/2/gs2_2_mc_fit_protein.xtc \
+    -o all2/md_all_protein_gs-gs2-gs3.xtc -settime
+
+cp gs/analysis/1/gs_1.tpr all2/run.tpr
+cp gs/analysis/1/index3.ndx all2/index3.ndx
+cp gs/analysis/1/gs_1_protein.gro all2/run_protein.gro
+cd all2
+echo -e "r 340 & 3\nr 341 & 3\nr 342 & 3\nr 343 & 3\nr 344 & 3\nr 345 & 3\nr 346 & 3\nr 347 & 3\nr 348 & 3\nr 349 & 3\nr 350 & 3\nq\n"| "$gmx" make_ndx -f run.tpr -o RMSD-CA.ndx -n index3.ndx
+echo -e "r 340 & 4\nr 341 & 4\nr 342 & 4\nr 343 & 4\nr 344 & 4\nr 345 & 4\nr 346 & 4\nr 347 & 4\nr 348 & 4\nr 349 & 4\nr 350 & 4\nq\n"| "$gmx" make_ndx -f run.tpr -o RMSD-BB.ndx -n index3.ndx
+
+
+mkdir RMSD-receptorbb
+cd RMSD-receptorbb
+for f in {1..11}; do
+    echo -e "ReceptorBackbone\nPeptide"$f"\n"| "$gmx" rms -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../index3.ndx -o rmsd_Galpha_$((f+339)).xvg -nopbc
+done
+for f in {340..350}; do
+    echo -e "ReceptorBackbone\nr_"$f"_&_Backbone\n"| "$gmx" rms -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../RMSD-BB.ndx -o rmsd_Galpha_${f}-bb.xvg -nopbc
+done
+for f in {340..350}; do
+    echo -e "ReceptorBackbone\nr_"$f"_&_C-alpha\n"| "$gmx" rms -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../RMSD-CA.ndx -o rmsd_Galpha_${f}-CA.xvg -nopbc
+done
+
+for f in rmsd_Galpha*; do
+    echo $f >> log.txt
+    gmx_mpi analyze -f $f | grep 'SS1*' >> log.txt
+done
+vi log.txt
+
+
+gmx_mpi analyze -f rmsd_Galpha_340.xvg
+
+
+for f in rmsd_Galpha*-CA*; do
+    echo $f >> log-tmp.txt
+    gmx_mpi analyze -f $f | grep 'SS1*' >> log-tmp.txt
+done
+vi log-tmp.txt
+
+
+
+echo -e "32 & 3\n32 & 4\n32 & 9\nq\n"| "$gmx" make_ndx -f run.tpr -o RMSF-all.ndx -n index3.ndx
+mkdir RMSF
+cd RMSF
+echo -e "Peptide_&_C-alpha\n"|gmx_mpi rmsf -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../RMSF-all.ndx -o rmsf_CA.xvg -res
+echo -e "Peptide_&_SideChain-H\n"|gmx_mpi rmsf -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../RMSF-all.ndx -o rmsf_sc.xvg -res
+echo -e "Peptide\n"|gmx_mpi rmsf -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../RMSF-all.ndx -o rmsf.xvg -res
+echo -e "Peptide_&_Backbone\n"|gmx_mpi rmsf -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../RMSF-all.ndx -o rmsf_bb.xvg -res
+
+
+gmx=gmx_mpi
+echo -e "r 340 & 9\nr 341 & 9\nr 342 & 9\nr 343 & 9\nr 344 & 9\nr 345 & 9\nr 346 & 9\nr 347 & 9\nr 348 & 9\nr 349 & 9\nr 350 & 9\nq\n"| "$gmx" make_ndx -f run.tpr -o RMSD-SC.ndx -n index3.ndx
+cd RMSD-receptorbb
+for f in {340..350}; do
+    echo -e "ReceptorBackbone\nr_"$f"_&_SideChain-H\n"| "$gmx" rms -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run_protein.gro -n ../RMSD-SC.ndx -o rmsd_Galpha_${f}-sc.xvg -nopbc
+done
+
+for f in rmsd_Galpha*-sc*; do
+    echo $f >> log-tmp2.txt
+    gmx_mpi analyze -f $f | grep 'SS1*' >> log-tmp2.txt
+done
+vi log-tmp2.txt
+
+
+
+gmx=gmx_mpi
+mkdir mindist
+cd mindist
+for f in {1..11}; do
+    echo -e "Peptide"$f"\nReceptor\n"| "$gmx" mindist -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run.tpr -n ../index3.ndx -on mindist-numcont_$((f+339)).xvg -od mindist_$((f+339)).xvg -d 0.35
+done
+
+
+for f in mindist-numcont_*; do
+    echo $f >> log-tmp.txt
+    gmx_mpi analyze -f $f | grep 'SS1*' >> log-tmp.txt
+done
+vi log-tmp.txt
+
+
+
+
+gmx=gmx_mpi
+for f in {1..11}; do
+    echo -e "Peptide"$f"\nReceptor\n"| "$gmx" mindist -f ../md_all_protein_gs-gs2-gs3.xtc -s ../run.tpr -n ../index3.ndx -on mindist-numcont-group_$((f+339)).xvg -od mindist-group_$((f+339)).xvg -d 0.35 -group
+done
+
+
+for f in mindist-numcont-group_*; do
+    #echo $f >> log-tmp2.txt
+    gmx_mpi analyze -f $f | grep 'SS1*' >> log-tmp2.txt
+done
+vi log-tmp2.txt
+
+
+
+
+
+
+
